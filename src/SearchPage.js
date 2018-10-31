@@ -7,13 +7,17 @@ import SingleShelf from './SingleShelf'
 class SearchPage extends Component {
 
     state = {
-        filteredBooks: [],
+        query: '',
+        filteredBooks: []
     }
 
     handleSearch(event) {
         const query = event.target.value
         search(query.trim())
-            .then(books => this.setState({ filteredBooks: books}))
+            .then(books => {
+                if(query === this.state.query)
+                    this.setState({ filteredBooks: books})
+            })
             .catch(() => {
                 this.setState({ filteredBooks: []})
             })
